@@ -1,0 +1,58 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  body {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff3b6;
+  }
+  
+.row {
+    display: flex;
+    justify-content: center;  /* 中央揃え */
+    flex-wrap: wrap;          /* 必要なら折り返しも許可 */
+                    /* 画像同士の間隔 */
+}
+
+/* 上段画像 */
+.row-top .character {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    /* border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* 下段画像 */
+.row-bottom .character {
+    width: 230px;
+    height: 300px;
+    object-fit: cover;
+    /* border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.character:hover {
+    transform: scale(1.1);
+}
+
+.character_img{
+    width: 700px;
+    height: 450px;
+
+}

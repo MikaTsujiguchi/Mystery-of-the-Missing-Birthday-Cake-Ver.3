@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lisa</title>
+  <link rel="stylesheet" href="characters_speaking.css" />
+</head>
+<body>
+
+  <img src="img/lisa.png" class="character_img" alt="Tom">
+
+  <button id="start-button" class="go-button">Talk to Lisa</button>
+  <br><br>
+  <a href="characters.html" class="back-button">Back to Character Select</a>
+
+  <audio id="pop-sound" src="sound/pop.mp3" preload="auto"></audio>
+
+  <script>
+    const startButton = document.getElementById('start-button');
+    const popSound = document.getElementById('pop-sound');
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert('Sorry, your browser does not support Speech Recognition API.');
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    let availableVoices = [];
+    let lastReply = '';
+    let lastRate = 1;
+
+    speechSynthesis.onvoiceschanged = () => {
+        availableVoices = speechSynthesis.getVoices();
+    };
+
+    startButton.addEventListener('click', () => {
+        popSound.play();
+        recognition.start();
+    });
+
+    recognition.onstart = () => {
+        startButton.classList.add('listening');
+    };
+
+    recognition.onend = () => {
+        startButton.classList.remove('listening');
+        popSound.play();
+    };
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.trim().toLowerCase();
+        console.log('User said:', transcript);
+
+        let reply = '';
+        let rate = 1;
+
+        // const age = 'I am 21 years old.';
+
+        if (transcript === 'how old are you') {
+            reply = 'I am 22 years old.';
+            rate = 1;
+        } else if (transcript === 'where are you from') {
+            reply = 'I am from Yellow City.';
+            rate = 1.7;
+        } else if (transcript === 'when is your birthday') {
+            reply = 'My birthday is March 13th.';
+            rate = 1;
+        } else if (
+            transcript === 'what is your phone number' ||
+            transcript === "what's your phone number"
+        ) {
+            reply = "my phone number is 482 3765.";
+            rate = 1;
+
+        } else if (
+            transcript === "do you know ken's phone number" ||
+            transcript === "what is ken's phone number" ||
+            transcript === "what's ken's phone number"
+        ) {
+            reply = "Ken's phone number is 497 1849.";
+            rate = 1;
+
+        } else if (
+            transcript === "do you know tom's phone number" ||
+            transcript === "what is tom's phone number" ||
+            transcript === "what's tom's phone number"
+        ) {
+            reply = "Tom's phone number is 455 2918.";
+            rate = 1;
+        } else if (
+            transcript === 'what is your home address' ||
+            transcript === "what's your home address" ||
+            transcript === 'where do you live'
+        ) {
+            reply = 'My home address is 5 4 1 Spring Road.';
+            rate = 1;
+        } else if (transcript === 'can you say it again slowly') {
+            if (lastReply) {
+                reply = lastReply;
+                rate = 0.6;
+            } else {
+                reply = 'Sorry, I have nothing to repeat.';
+                rate = 1;
+            }
+        } else {
+            reply = 'Sorry, can you say it again?';
+            rate = 1;
+        }
+
+        // 保存（繰り返し用）
+        if (transcript !== 'can you say it again slowly') {
+            lastReply = reply;
+            lastRate = rate;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(reply);
+        utterance.lang = 'en-US';
+        utterance.rate = rate;
+
+        const maleVoice = availableVoices.find(voice =>
+            voice.name.includes('Female') ||
+            voice.name.includes('Google UK English Female') ||
+            voice.name.includes('Google UK English Female')
+        );
+
+        if (maleVoice) {
+            utterance.voice = maleVoice;
+        } else {
+            console.log('Voice not found, using default.');
+        }
+
+        setTimeout(() => {
+            speechSynthesis.speak(utterance);
+        }, 1000);
+    };
+
+    recognition.onerror = (event) => {
+        console.error('Recognition error:', event.error);
+    };
+  </script>
+
+</body>
+</html>

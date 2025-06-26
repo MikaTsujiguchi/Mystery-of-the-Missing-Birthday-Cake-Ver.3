@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Story Page</title>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- 自分のCSSファイルを読み込む -->
+    <link rel="stylesheet" href="story.css" />
+</head>
+<body>
+
+
+    <!-- Swiper Container -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="img/story1.png" ></div>
+            <div class="swiper-slide"><img src="img/story2.png" ></div>
+            <div class="swiper-slide"><img src="img/story3.png" ></div>
+            <div class="swiper-slide"><img src="img/story4.png" ></div>
+            <div class="swiper-slide"><img src="img/story5.png" ></div>
+            <div class="swiper-slide"><img src="img/story6.png" ></div>
+            <div class="swiper-slide"><img src="img/story7.png" ></div>
+            <div class="swiper-slide"><img src="img/story8.png" ></div>
+            <div class="swiper-slide"><img src="img/story9.png" ></div>
+            <div class="swiper-slide"><img src="img/story10.png" ></div>
+            <div class="swiper-slide"><img src="img/story11.png" ></div>
+        </div>
+
+        <!-- ページネーション -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Swiper 初期化 -->
+    <script>
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            direction: 'horizontal',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            grabCursor: true,
+            slidesPerView: 1,
+            spaceBetween: 10,
+        });
+    </script>
+
+    <a href="characters.html" class="next_button">Next</a>
+
+</body>
+</html>
+
